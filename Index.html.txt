@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winzo Community Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* --- NEW WINZO COLOR SCHEME --- */
+        .winzo-bg {
+             background: linear-gradient(180deg, #3b0764 0%, #1e1b4b 100%);
+        }
+        .card-bg {
+            background-color: rgba(49, 23, 91, 0.4); /* Translucent purple for cards */
+        }
+        .mobile-screen {
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+        }
+        .nav-item.active { color: #fde047; /* Brighter Yellow for active tab */ }
+        .nav-item.active .nav-icon { transform: translateY(-2px); transition: transform 0.2s ease-in-out; }
+        
+        .inner-tab-item {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .inner-tab-item.active {
+            background-color: #fde047; /* Brighter Yellow */
+            color: #1e1b4b; /* Dark Purple text */
+        }
+
+        /* --- GRADIENT BUTTONS --- */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.1s ease;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-green {
+            background: linear-gradient(90deg, #4ade80 0%, #16a34a 100%);
+            border-bottom: 3px solid #15803d;
+        }
+        .btn-orange {
+            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+            border-bottom: 3px solid #d97706;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex items-center justify-center winzo-bg text-white">
+
+    <div class="mobile-screen winzo-bg">
+
+        <header class="flex items-center justify-between p-4 bg-gradient-to-b from-purple-900/50 to-transparent shadow-lg z-10 flex-shrink-0">
+            <div class="flex items-center space-x-3">
+                 <img src="https://placehold.co/40x40/facc15/1e1b4b?text=A" class="w-10 h-10 rounded-full">
+                <div class="flex flex-col text-sm">
+                    <div class="flex items-center space-x-1">
+                        <i class="fas fa-gem text-yellow-300"></i>
+                        <span>1200</span>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <i class="fas fa-wallet text-green-400"></i>
+                        <span>₹500</span>
+                    </div>
+                </div>
+            </div>
+            <div id="section-title" class="flex-1 text-center font-bold text-lg">FRIENDS</div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <i class="fas fa-bell text-xl text-white"></i>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                </div>
+                <i class="fas fa-cog text-xl text-white"></i>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-4 space-y-6">
+
+            <div id="friends-page" class="community-page">
+                <h2 class="text-2xl font-bold mb-4">My Network</h2>
+                <section class="card-bg p-4 rounded-xl shadow-md mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Add Friends</h3>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <input type="text" placeholder="Search by username or Winzo ID" class="flex-1 p-2 rounded-lg bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                        <button class="btn btn-orange p-2"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="flex justify-around mt-4">
+                        <button class="flex flex-col items-center text-yellow-300"><i class="fas fa-qrcode text-2xl"></i><span class="text-xs mt-1">QR Code</span></button>
+                        <button class="flex flex-col items-center text-yellow-300"><i class="fas fa-link text-2xl"></i><span class="text-xs mt-1">Invite Link</span></button>
+                        <button class="flex flex-col items-center text-yellow-300"><i class="fas fa-user-plus text-2xl"></i><span class="text-xs mt-1">Requests</span></button>
+                    </div>
+                </section>
+                <section class="mb-6">
+                    <h3 class="text-lg font-semibold mb-3">People You May Know</h3>
+                    <div class="flex overflow-x-auto space-x-4 pb-2 no-scrollbar">
+                        <div class="flex-shrink-0 w-32 p-3 card-bg rounded-xl shadow-md flex flex-col items-center text-center"><img src="https://placehold.co/64x64/FFD700/000000?text=RM" alt="Avatar" class="w-16 h-16 rounded-full object-cover border-2 border-yellow-300 mb-2"><h4 class="font-bold text-sm">RohanM</h4><p class="text-xs text-gray-400">2 mutual friends</p><button class="btn btn-orange text-xs mt-2 py-1 px-4">Add</button></div>
+                        <div class="flex-shrink-0 w-32 p-3 card-bg rounded-xl shadow-md flex flex-col items-center text-center"><img src="https://placehold.co/64x64/ADD8E6/000000?text=SD" alt="Avatar" class="w-16 h-16 rounded-full object-cover border-2 border-yellow-300 mb-2"><h4 class="font-bold text-sm">SaraD</h4><p class="text-xs text-gray-400">Plays Ludo</p><button class="btn btn-orange text-xs mt-2 py-1 px-4">Add</button></div>
+                    </div>
+                </section>
+                <section class="mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Friend Missions</h3>
+                    <div class="card-bg p-4 rounded-xl shadow-md space-y-3">
+                        <p class="text-sm text-gray-300">Complete quests with friends for bonus rewards!</p>
+                        <div class="bg-slate-800 p-3 rounded-lg">
+                            <div class="flex items-center space-x-3"><i class="fas fa-users text-yellow-300 text-xl"></i><div><h4 class="font-semibold">Duo Carrom Challenge</h4><p class="text-xs text-gray-400">Win 10 Carrom games with JohnD</p></div></div>
+                            <div class="w-full bg-slate-700 rounded-full h-2.5 mt-2"><div class="bg-green-500 h-2.5 rounded-full" style="width: 45%"></div></div>
+                            <p class="text-right text-xs text-gray-400 mt-1">4/10 Complete</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="mb-6">
+                    <h3 class="text-lg font-semibold mb-3">My Friends List</h3>
+                    <div class="space-y-3">
+                        <div class="card-bg p-3 rounded-xl shadow-md flex items-center justify-between">
+                            <div class="flex items-center space-x-3"><div class="relative"><img src="https://placehold.co/48x48/FFD700/000000?text=JD" alt="Avatar" class="w-12 h-12 rounded-full"><div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-slate-800"></div></div><div><h4 class="font-bold text-base">JohnD</h4><p class="text-sm text-gray-300"><i class="fas fa-crown text-yellow-400 text-xs mr-1"></i>Dragon League</p><p class="text-xs text-gray-400"><i class="fas fa-fire text-orange-400 mr-1"></i>15-day streak</p><p class="text-xs text-green-400">Playing Rummy</p></div></div><div class="flex space-x-3 text-xl"><button class="text-yellow-300"><i class="fas fa-gamepad"></i></button><button class="text-yellow-300"><i class="fas fa-comment-dots"></i></button></div>
+                        </div>
+                        <div class="card-bg p-3 rounded-xl shadow-md flex items-center justify-between">
+                            <div class="flex items-center space-x-3"><div class="relative"><img src="https://placehold.co/48x48/ADD8E6/000000?text=AS" alt="Avatar" class="w-12 h-12 rounded-full"><div class="absolute bottom-0 right-0 w-3 h-3 bg-gray-500 rounded-full border-2 border-slate-800"></div></div><div><h4 class="font-bold text-base">AnnaS</h4><p class="text-sm text-gray-300"><i class="fas fa-shield-alt text-blue-400 text-xs mr-1"></i>Wolf League</p><p class="text-xs text-gray-400"><i class="fas fa-fire text-orange-400 mr-1"></i>7-day streak</p><p class="text-xs text-gray-500">Last active 3h ago</p></div></div><div class="flex space-x-3 text-xl"><button class="text-yellow-300"><i class="fas fa-gamepad"></i></button><button class="text-yellow-300"><i class="fas fa-comment-dots"></i></button></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="groups-page" class="community-page hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold">Groups</h2>
+                    <button class="btn btn-green"><i class="fas fa-plus-circle mr-2"></i>Create</button>
+                </div>
+                <div class="flex bg-slate-900 rounded-full p-1 mb-6">
+                    <button class="inner-tab-item flex-1 active" data-group-tab="my-groups">My Groups</button>
+                    <button class="inner-tab-item flex-1" data-group-tab="discover-groups">Discover</button>
+                </div>
+                <div id="my-groups-content" class="groups-tab-content space-y-4">
+                    <div class="card-bg p-4 rounded-xl shadow-md flex items-center justify-between">
+                        <div class="flex items-center space-x-4"><img src="https://placehold.co/56x56/8A2BE2/FFFFFF?text=IIMB" alt="Group Icon" class="w-14 h-14 rounded-full"><div class="flex-1"><h3 class="font-bold text-lg">IIMB Buddies</h3><p class="text-sm text-gray-300">8 members</p><p class="text-xs text-gray-400">New challenge started</p></div></div><button class="btn btn-orange text-sm">Enter</button>
+                    </div>
+                    <div class="card-bg p-4 rounded-xl shadow-md flex items-center justify-between">
+                        <div class="flex items-center space-x-4"><img src="https://placehold.co/56x56/3CB371/FFFFFF?text=FLAT" alt="Group Icon" class="w-14 h-14 rounded-full"><div class="flex-1"><h3 class="font-bold text-lg">Flatmates Gamers</h3><p class="text-sm text-gray-300">5 members</p><p class="text-xs text-gray-400">Last message 10m ago</p></div></div><button class="btn btn-orange text-sm">Enter</button>
+                    </div>
+                </div>
+                <div id="discover-groups-content" class="groups-tab-content hidden space-y-4">
+                    <div class="card-bg p-4 rounded-xl shadow-md flex items-center justify-between">
+                        <div class="flex items-center space-x-4"><img src="https://placehold.co/56x56/6A5ACD/FFFFFF?text=PUBG" alt="Group Icon" class="w-14 h-14 rounded-full"><div class="flex-1"><h3 class="font-bold text-lg">PUBG Mobile Squad</h3><p class="text-sm text-gray-300">1.2K members</p><p class="text-xs text-gray-400">Competitive play & tips</p></div></div><button class="btn btn-green">Join</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="celebrate-page" class="community-page hidden">
+                <h2 class="text-2xl font-bold mb-4">Celebrate</h2>
+                <div class="card-bg rounded-xl p-3 mb-6"><input type="text" placeholder="Share your achievement..." class="w-full p-2 rounded-lg bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-300"></div>
+                <div class="space-y-4">
+                    <div class="card-bg p-4 rounded-xl shadow-md"><div class="flex items-start space-x-3 mb-3"><img src="https://placehold.co/40x40/FFD700/000000?text=JD" class="w-10 h-10 rounded-full"><p><span class="font-bold">JohnD</span> won <span class="font-bold text-yellow-300">₹500</span> in Rummy!<br><span class="text-xs text-gray-500">1h ago</span></p></div><div class="flex justify-around text-xl pt-3 border-t border-slate-700"><button class="text-gray-400 hover:text-yellow-300"><i class="far fa-heart"></i></button><button class="text-gray-400 hover:text-yellow-300"><i class="far fa-comment"></i></button><button class="text-yellow-300"><i class="fas fa-gift"></i></button><button class="text-yellow-300"><i class="fas fa-gamepad"></i></button></div></div>
+                    <div class="card-bg p-4 rounded-xl shadow-md"><div class="flex items-start space-x-3 mb-3"><img src="https://placehold.co/40x40/ADD8E6/000000?text=AS" class="w-10 h-10 rounded-full"><p><span class="font-bold">AnnaS</span> just completed a <span class="font-bold text-orange-400">100-day streak!</span> 🔥<br><span class="text-xs text-gray-500">3h ago</span></p></div><div class="flex justify-around text-xl pt-3 border-t border-slate-700"><button class="text-red-500"><i class="fas fa-heart"></i> <span class="text-sm">5</span></button><button class="text-gray-400 hover:text-yellow-300"><i class="far fa-comment"></i></button><button class="text-yellow-300"><i class="fas fa-gift"></i></button><button class="text-gray-400 hover:text-yellow-300"><i class="fas fa-share-alt"></i></button></div></div>
+                    <div class="card-bg p-4 rounded-xl shadow-md"><div class="flex items-start space-x-3 mb-3"><img src="https://placehold.co/40x40/FF6347/000000?text=MK" class="w-10 h-10 rounded-full"><p><span class="font-bold">MikeK</span> has been promoted to the <span class="font-bold text-red-400">Lion League!</span> 🦁<br><span class="text-xs text-gray-500">1d ago</span></p></div><div class="flex justify-around text-xl pt-3 border-t border-slate-700"><button class="text-gray-400 hover:text-yellow-300"><i class="far fa-heart"></i></button><button class="text-gray-400 hover:text-yellow-300"><i class="far fa-comment"></i></button><button class="text-yellow-300"><i class="fas fa-gift"></i></button><button class="text-gray-400 hover:text-yellow-300"><i class="fas fa-share-alt"></i></button></div></div>
+                </div>
+            </div>
+
+            <div id="leaderboards-page" class="community-page hidden">
+                <h2 class="text-2xl font-bold mb-4">Leaderboards</h2>
+                <div class="flex justify-center bg-slate-900 rounded-full p-1 mb-2">
+                    <button class="inner-tab-item flex-1 text-sm active">Friends</button>
+                    <button class="inner-tab-item flex-1 text-sm">Local</button>
+                    <button class="inner-tab-item flex-1 text-sm">Global</button>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <select class="bg-slate-800 border-none text-white text-sm rounded-lg focus:ring-yellow-300 block p-2"><option selected>All Games</option><option value="rummy">Rummy</option><option value="ludo">Ludo</option></select>
+                    <div class="flex bg-slate-900 rounded-full p-1 text-xs"><button class="px-3 py-1 rounded-full bg-slate-700">Daily</button><button class="px-3 py-1 rounded-full">Weekly</button><button class="px-3 py-1 rounded-full">All-Time</button></div>
+                </div>
+                <div class="space-y-2">
+                    <div class="card-bg p-2 rounded-lg flex items-center space-x-4"><span class="font-bold text-lg w-8 text-center">1. 🥇</span><img src="https://placehold.co/40x40/FFD700/000000?text=JD" class="w-10 h-10 rounded-full"><div class="flex-1"><p class="font-semibold">JohnD</p><p class="text-xs text-gray-400"><i class="fas fa-crown text-yellow-400"></i> Dragon</p></div><span class="font-bold text-yellow-300">₹15,200</span></div>
+                    <div class="card-bg p-2 rounded-lg flex items-center space-x-4"><span class="font-bold text-lg w-8 text-center">2. 🥈</span><img src="https://placehold.co/40x40/FF6347/000000?text=MK" class="w-10 h-10 rounded-full"><div class="flex-1"><p class="font-semibold">MikeK</p><p class="text-xs text-gray-400"><i class="fas fa-paw text-red-400"></i> Lion</p></div><span class="font-bold text-yellow-300">₹12,500</span></div>
+                    <div class="bg-yellow-400/20 border-2 border-yellow-300 p-2 rounded-lg flex items-center space-x-4"><span class="font-bold text-lg w-8 text-center text-yellow-300">58.</span><img src="https://placehold.co/40x40/facc15/1e1b4b?text=A" class="w-10 h-10 rounded-full"><div class="flex-1"><p class="font-semibold text-yellow-300">You</p><p class="text-xs text-gray-400"><i class="fas fa-shield-alt text-blue-400"></i> Wolf</p></div><span class="font-bold text-yellow-300">₹1,800</span></div>
+                </div>
+                <button class="btn btn-orange w-full mt-4">View My Rank</button>
+            </div>
+
+            <div id="discover-page" class="community-page hidden space-y-8">
+                <section>
+                    <h3 class="text-xl font-bold mb-3">Featured Groups</h3>
+                    <div class="flex overflow-x-auto space-x-4 pb-2 no-scrollbar">
+                        <div class="flex-shrink-0 w-48 p-3 card-bg rounded-xl shadow-md"><div class="flex items-center space-x-3 mb-2"><img src="https://placehold.co/40x40/6A5ACD/FFFFFF?text=PUBG" class="w-10 h-10 rounded-full"><h4 class="font-bold">PUBG Squads</h4></div><p class="text-xs text-gray-400 mb-3">1.2K members - For competitive players.</p><button class="btn btn-green w-full text-sm py-1">Join</button></div>
+                        <div class="flex-shrink-0 w-48 p-3 card-bg rounded-xl shadow-md"><div class="flex items-center space-x-3 mb-2"><img src="https://placehold.co/40x40/20B2AA/FFFFFF?text=RUM" class="w-10 h-10 rounded-full"><h4 class="font-bold">Rummy Kings</h4></div><p class="text-xs text-gray-400 mb-3">500 members - Daily challenges.</p><button class="btn btn-green w-full text-sm py-1">Join</button></div>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-xl font-bold mb-3">Community Events</h3>
+                    <div class="card-bg p-4 rounded-xl shadow-md bg-cover bg-center" style="background-image: linear-gradient(rgba(59, 7, 100, 0.8), rgba(30, 27, 75, 0.8)), url('https://placehold.co/400x150/f59e0b/FFFFFF?text=Tournament');">
+                        <h4 class="font-bold text-lg">Weekly Ludo Tournament</h4><p class="text-sm text-yellow-300 mb-2">Prize Pool: ₹1,00,000</p><p class="text-xs text-gray-300 mb-4">Starts this Saturday! Do you have what it takes?</p><button class="btn btn-green">Register Now</button>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-xl font-bold mb-3">Player Spotlight</h3>
+                    <div class="card-bg p-4 rounded-xl shadow-md flex items-center space-x-4">
+                        <img src="https://placehold.co/64x64/FFD700/000000?text=JD" class="w-16 h-16 rounded-full border-2 border-yellow-300">
+                        <div><h4 class="font-bold text-lg">JohnD - Player of the Week</h4><p class="text-sm text-gray-300">"My secret to winning in Rummy? Patience and knowing when to drop!"</p></div>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-xl font-bold mb-3">Game Hubs</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="h-24 bg-red-800 rounded-lg flex items-center justify-center font-bold text-lg">Free Fire Zone</div>
+                        <div class="h-24 bg-green-800 rounded-lg flex items-center justify-center font-bold text-lg">Ludo Lounge</div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+
+        <footer class="flex items-center justify-around p-3 bg-gradient-to-t from-black/50 to-transparent flex-shrink-0">
+            <button class="nav-item flex flex-col items-center w-1/5 active" data-page="friends-page"><i class="fas fa-user-friends text-xl nav-icon"></i><span class="text-xs mt-1 font-semibold">Friends</span></button>
+            <button class="nav-item flex flex-col items-center text-gray-400 w-1/5" data-page="groups-page"><i class="fas fa-users text-xl nav-icon"></i><span class="text-xs mt-1">Groups</span></button>
+            <button class="nav-item flex flex-col items-center text-gray-400 w-1/5" data-page="celebrate-page"><i class="fas fa-trophy text-xl nav-icon"></i><span class="text-xs mt-1">Celebrate</span></button>
+            <button class="nav-item flex flex-col items-center text-gray-400 w-1/5" data-page="leaderboards-page"><i class="fas fa-chart-bar text-xl nav-icon"></i><span class="text-xs mt-1">Leaderboards</span></button>
+            <button class="nav-item flex flex-col items-center text-gray-400 w-1/5" data-page="discover-page"><i class="fas fa-compass text-xl nav-icon"></i><span class="text-xs mt-1">Discover</span></button>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const pages = document.querySelectorAll('.community-page');
+            const sectionTitle = document.getElementById('section-title');
+            function showPage(pageId) {
+                pages.forEach(page => page.classList.add('hidden'));
+                const activePage = document.getElementById(pageId);
+                if (activePage) activePage.classList.remove('hidden');
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    item.classList.add('text-gray-400');
+                    if (item.dataset.page === pageId) {
+                        item.classList.add('active');
+                        item.classList.remove('text-gray-400');
+                    }
+                });
+                const titleEl = document.querySelector(`.nav-item[data-page="${pageId}"] span`);
+                if(titleEl) sectionTitle.textContent = titleEl.textContent.toUpperCase();
+            }
+            navItems.forEach(item => item.addEventListener('click', () => showPage(item.dataset.page)));
+            const groupsTabItems = document.querySelectorAll('.groups-tab-item');
+            const groupsTabContents = document.querySelectorAll('.groups-tab-content');
+            if (groupsTabItems.length > 0) {
+                 groupsTabItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        const tabId = item.dataset.groupTab;
+                        groupsTabContents.forEach(content => content.classList.add('hidden'));
+                        const activeContent = document.getElementById(tabId + '-content');
+                        if(activeContent) activeContent.classList.remove('hidden');
+                        groupsTabItems.forEach(tab => tab.classList.remove('active'));
+                        item.classList.add('active');
+                    });
+                });
+            }
+            showPage('friends-page');
+        });
+    </script>
+</body>
+</html>
