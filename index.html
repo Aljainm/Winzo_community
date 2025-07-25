@@ -25,16 +25,15 @@
             background-color: rgba(49, 23, 91, 0.4); /* Translucent purple for cards */
         }
         .mobile-screen {
-            /* --- FIXED 9:15.7 ASPECT RATIO & ADJUSTED FONT SIZE --- */
+            /* --- NEW CSS GRID LAYOUT & 9:15.9 RATIO --- */
             width: 360px;
-            height: 628px; /* 360 * (15.7 / 9) = 628 */
+            height: 636px; /* 360 * (15.9 / 9) = 636 */
             margin: auto;
-            display: flex;
-            flex-direction: column;
+            display: grid; /* Switched to Grid */
+            grid-template-rows: auto 1fr auto; /* Header(auto), Content(fill), Footer(auto) */
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
-            font-size: 15px; /* Adjusts base font size for all `rem` units inside */
         }
         .nav-item.active { color: #fde047; /* Brighter Yellow for active tab */ }
         .nav-item.active .nav-icon { transform: translateY(-2px); transition: transform 0.2s ease-in-out; }
@@ -76,7 +75,7 @@
 
     <div class="mobile-screen winzo-bg">
 
-        <header class="flex items-center justify-between p-4 bg-gradient-to-b from-purple-900/50 to-transparent shadow-lg z-10 flex-shrink-0">
+        <header class="flex items-center justify-between p-4 bg-gradient-to-b from-purple-900/50 to-transparent shadow-lg z-10">
             <div class="flex items-center space-x-3">
                  <img src="https://placehold.co/40x40/facc15/1e1b4b?text=A" class="w-10 h-10 rounded-full">
                 <div class="flex flex-col text-sm">
@@ -100,7 +99,7 @@
             </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto min-h-0 p-4 space-y-6">
+        <main class="overflow-y-auto min-h-0 p-4 space-y-6">
 
             <div id="friends-page" class="community-page">
                 <h2 class="text-2xl font-bold mb-4">My Network</h2>
