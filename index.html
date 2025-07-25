@@ -25,9 +25,9 @@
             background-color: rgba(49, 23, 91, 0.4); /* Translucent purple for cards */
         }
         .mobile-screen {
-            width: 100%;
-            max-width: 450px;
-            height: 100vh;
+            /* --- FIXED 9:14 ASPECT RATIO --- */
+            width: 360px;
+            height: 560px; /* 360 * (14/9) = 560 */
             margin: auto;
             display: flex;
             flex-direction: column;
@@ -99,7 +99,7 @@
             </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-4 space-y-6">
+        <main class="flex-1 overflow-y-auto min-h-0 p-4 space-y-6">
 
             <div id="friends-page" class="community-page">
                 <h2 class="text-2xl font-bold mb-4">My Network</h2>
