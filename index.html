@@ -25,15 +25,16 @@
             background-color: rgba(49, 23, 91, 0.4); /* Translucent purple for cards */
         }
         .mobile-screen {
-            /* --- FIXED 9:14 ASPECT RATIO --- */
+            /* --- FIXED 9:15.7 ASPECT RATIO & ADJUSTED FONT SIZE --- */
             width: 360px;
-            height: 560px; /* 360 * (14/9) = 560 */
+            height: 628px; /* 360 * (15.7 / 9) = 628 */
             margin: auto;
             display: flex;
             flex-direction: column;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            font-size: 15px; /* Adjusts base font size for all `rem` units inside */
         }
         .nav-item.active { color: #fde047; /* Brighter Yellow for active tab */ }
         .nav-item.active .nav-icon { transform: translateY(-2px); transition: transform 0.2s ease-in-out; }
